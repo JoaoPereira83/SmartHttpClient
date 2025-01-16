@@ -9,15 +9,15 @@
 
 	<PropertyGroup>
 		<PackageId>SmartHttpClient</PackageId>
-		<Version>1.0.0</Version>
+		<Version>1.0.1</Version>
 		<Authors>Joao Pereira</Authors>
 		<Company></Company>
 		<Description>HTTP Client Service Library for .NET 8.0. This is a utility that abstracts the functionality of HttpClient, providing a reusable, configurable, and extendable way to interact with external APIs or HTTP services. </Description>
 		<PackageTags>HttpClient;REST;API;JSON;HttpClientWrapper;HTTP;HttpRequest;HttpUtility</PackageTags>
-		<RepositoryUrl>https://github.com/JoaoPereira83/HTTPClientService</RepositoryUrl>
-		<ProjectUrl>https://github.com/JoaoPereira83/HTTPClientService</ProjectUrl>
-		<RepositoryType>git</RepositoryType>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryUrl>https://github.com/JoaoPereira83/SmartHttpClient</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<ProjectUrl>https://github.com/JoaoPereira83/SmartHttpClient</ProjectUrl>
 		<PackageReleaseNotes>
 			- Added new methods for HTTP GET and POST.
 			- Fixed bugs with retry policies.
