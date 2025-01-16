@@ -20,7 +20,7 @@ With **SmartHttpClient**, developers no longer need to manually handle JSON (it 
 Install the package via NuGet:
 
 ```bash
-dotnet add package SmartHttpClient --version 1.0.0
+dotnet add package SmartHttpClient --version 1.0.3
 ```
 
 ---

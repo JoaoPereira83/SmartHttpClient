@@ -9,7 +9,7 @@
 
 	<PropertyGroup>
 		<PackageId>SmartHttpClient</PackageId>
-		<Version>1.0.2</Version>
+		<Version>1.0.3</Version>
 		<Authors>Joao Pereira</Authors>
 		<Company></Company>
 		<Description>HTTP Client Service Library for .NET 8.0. This is a utility that abstracts the functionality of HttpClient, providing a reusable, configurable, and extendable way to interact with external APIs or HTTP services. </Description>
