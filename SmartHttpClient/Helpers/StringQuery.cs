@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace HTTPClientService.Library.Helpers;
+namespace SmartHttpClient.Helpers;
 
 public static class StringQuery
 {

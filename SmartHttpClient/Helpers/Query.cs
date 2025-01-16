@@ -3,7 +3,7 @@
 using System.Text;
 using System.Text.Encodings.Web;
 
-namespace HTTPClientService.Library.Helpers;
+namespace SmartHttpClient.Helpers;
 
 public static class Query
 {

@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace HTTPClientService.Library.Helpers;
+namespace SmartHttpClient.Helpers;
 
 public static class EncodeAndDecodeBase64
 {

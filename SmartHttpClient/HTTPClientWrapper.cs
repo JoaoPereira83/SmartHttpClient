@@ -1,7 +1,9 @@
-﻿using HTTPClientService.Library.Enum;
-using HTTPClientService.Library.Helpers;
-using HTTPClientService.Library.Models;
-using HTTPClientService.Library.Utility;
+﻿
+
+using SmartHttpClient.Enum;
+using SmartHttpClient.Helpers;
+using SmartHttpClient.Models;
+using SmartHttpClient.Utility;
 
 using System.Net.Http.Headers;
 using System.Net.Mime;
@@ -9,7 +11,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
-namespace HTTPClientService.Library;
+namespace SmartHttpClient;
 
 public class HTTPClientWrapper(IHttpClientFactory httpClientFactory) : IHTTPClientWrapper
 {

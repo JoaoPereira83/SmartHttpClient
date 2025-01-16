@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace HTTPClientService.Library.Utility;
+namespace SmartHttpClient.Utility;
 /// <summary>
 /// Exception thrown when an HTTP request times out.
 /// </summary>

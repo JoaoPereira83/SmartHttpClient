@@ -1,4 +1,4 @@
-﻿namespace HTTPClientService.Library.Enum;
+﻿namespace SmartHttpClient.Enum;
 
 /// <summary>
 /// Represents the authentication methods for the HTTP client.
@@ -9,5 +9,5 @@ public enum AuthenticationMethod
     Basic, // Example for Basic authentication
     Bearer, // Example for Bearer token authentication
     ApiKey // Example for API Key authentication
-   
+
 }

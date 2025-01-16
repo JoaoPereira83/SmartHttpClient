@@ -1,4 +1,4 @@
-﻿namespace HTTPClientService.Library.Models;
+﻿namespace SmartHttpClient.Models;
 /// <summary>
 /// Represents a response containing a file's name and its content.
 /// </summary>

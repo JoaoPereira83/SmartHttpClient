@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Primitives;
 
-namespace HTTPClientService.Library.Helpers;
+namespace SmartHttpClient.Helpers;
 
 /// <summary>
 /// A structure that accumulates key-value pairs, allowing multiple values for a single key.

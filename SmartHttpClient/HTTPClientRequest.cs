@@ -1,6 +1,6 @@
-﻿using HTTPClientService.Library.Models;
+﻿using SmartHttpClient.Models;
 
-namespace HTTPClientService.Library;
+namespace SmartHttpClient;
 
 /// <summary>
 /// Represents an HTTP client request.

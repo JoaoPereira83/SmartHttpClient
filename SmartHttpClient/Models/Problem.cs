@@ -1,4 +1,4 @@
-﻿namespace HTTPClientService.Library.Models;
+﻿namespace SmartHttpClient.Models;
 
 // ----------------------------------------------------------------------------------------
 

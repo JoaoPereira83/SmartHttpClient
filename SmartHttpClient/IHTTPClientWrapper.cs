@@ -1,4 +1,4 @@
-﻿namespace HTTPClientService.Library;
+﻿namespace SmartHttpClient;
 
 /// <summary>
 /// Represents an interface for an HTTP client service.

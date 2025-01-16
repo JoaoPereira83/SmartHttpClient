@@ -1,6 +1,6 @@
-﻿using HTTPClientService.Library.Enum;
+﻿using SmartHttpClient.Enum;
 
-namespace HTTPClientService.Library.Models;
+namespace SmartHttpClient.Models;
 
 public class Authenticator
 {

@@ -1,4 +1,4 @@
-﻿namespace HTTPClientService.Library.Helpers;
+﻿namespace SmartHttpClient.Helpers;
 
 /// <summary>
 /// Provides extension methods for string manipulation.

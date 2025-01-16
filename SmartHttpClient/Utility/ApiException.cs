@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace HTTPClientService.Library.Utility;
+namespace SmartHttpClient.Utility;
 /// <summary>
 /// Represents an exception that occurs during API calls.
 /// </summary>
