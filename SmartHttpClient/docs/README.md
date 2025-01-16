@@ -157,7 +157,7 @@ We welcome contributions! Please feel free to:
 ---
 
 ## **License**
-This project is licensed under the **MIT License**. See the [LICENSE](https://github.com/JoaoPereira83/HTTPClientService/blob/main/LICENSE) file for details.
+This project is licensed under the **MIT License**. See the [LICENSE](https://github.com/JoaoPereira83/SmartHttpClient/blob/master/License) file for details.
 
 ---
 
