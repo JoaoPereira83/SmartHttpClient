@@ -152,7 +152,7 @@ await _httpClientWrapper.SendAsync(new HTTPClientRequest
 ## **Contributing**
 We welcome contributions! Please feel free to:
 - Submit pull requests.
-- Report issues or request features in the [GitHub repository](https://github.com/JoaoPereira83/HTTPClientService).
+- Report issues or request features in the [GitHub repository](https://github.com/JoaoPereira83/SmartHttpClient).
 
 ---
 
