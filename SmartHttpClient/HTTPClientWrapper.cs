@@ -40,6 +40,11 @@ public class HTTPClientWrapper(IHttpClientFactory httpClientFactory) : IHTTPClie
             using var requestMessage = BuildRequestMessage(request);
 
             var response = await httpClient.SendAsync(requestMessage);
+      
+            if(typeof(T) == typeof(HttpResponseMessage))
+            {
+                return (T)(object)response;
+            }
 
             await HandleErrorsAsync(response);
 
@@ -143,13 +148,13 @@ public class HTTPClientWrapper(IHttpClientFactory httpClientFactory) : IHTTPClie
     /// <returns></returns>
     private static async Task<T> DeserializeJsonContentAsync<T>(HttpResponseMessage httpRequestMessage)
     {
-        var responseContent = await httpRequestMessage.Content.ReadAsStringAsync();
-        if (string.IsNullOrEmpty(responseContent))
+        await using var stream = await httpRequestMessage.Content.ReadAsStreamAsync();
+        if (stream is null || stream.Length == 0)
         {
             return default!;
         }
 
-        return JsonSerializer.Deserialize<T>(responseContent, BuildSerializerSettings())!;
+        return await JsonSerializer.DeserializeAsync<T>(stream, BuildSerializerSettings()) ?? default!;
     }
 
 

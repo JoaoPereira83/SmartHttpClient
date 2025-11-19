@@ -1,8 +1,27 @@
 ﻿# **SmartHttpClient**
 
-**SmartHttpClient** is a powerful library for .NET 8.0 that simplifies working with `HttpClient`. It abstracts away repetitive tasks like creating new `HttpClient` instances, handling JSON serialization/deserialization, and managing headers, authentication, and timeouts. 
+**SmartHttpClient** is a powerful library for .NET that simplifies working with `HttpClient` by abstracting away repetitive tasks such as managing client instances, handling JSON serialization/deserialization, configuring headers, authentication, timeouts, and endpoint parameters. 
+
+Version: 1.0.5 is now fully upgraded to .NET 10 and inludes several important improvements to reability and performance, and developer flexibility.
 
 With **SmartHttpClient**, developers no longer need to manually handle JSON (it does it automatically for you). The library is flexible and supports both strongly typed (`T`) and non-typed requests.
+
+
+This version has been upgraded to .NET 10 and includes improvements such as:
+- Support for raw HttpResponseMessage via generic detection  
+- Improved SendAsync<T>() handling  
+- A fixed JSON deserialization bug  
+- New non-generic SendAsync() overload returning HttpResponseMessage  
+- Cleaner and more reliable internal pipeline 
+
+---
+# What's New in .NET 10 Release
+
+## Upgraded to .NET 10
+SmartHttpClient now targets net10.0, giving you:
+- Improved async performance  
+- Latest C# features  
+- Better long-term platform support  
 
 ---
 
@@ -20,7 +39,7 @@ With **SmartHttpClient**, developers no longer need to manually handle JSON (it 
 Install the package via NuGet:
 
 ```bash
-dotnet add package SmartHttpClient --version 1.0.4
+dotnet add package SmartHttpClient --version 1.0.5
 ```
 
 ---
@@ -269,7 +288,7 @@ public async Task<IEnumerable<Product>> GetProductAsync(ProductRequest productRe
 ---
 
 ## **Dependencies**
-- **Microsoft.Extensions.Http (>= 8.0.1)**
+- **Microsoft.Extensions.Http (>= 10.0.0)**
 
 ---
 
