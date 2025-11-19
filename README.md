@@ -20,7 +20,7 @@ With **SmartHttpClient**, developers no longer need to manually handle JSON (it 
 Install the package via NuGet:
 
 ```bash
-dotnet add package SmartHttpClient --version 1.0.3
+dotnet add package SmartHttpClient --version 1.0.4
 ```
 
 ---
@@ -34,114 +34,238 @@ Add the following services in your `Program.cs` file to enable dependency inject
 builder.Services.AddHttpClient();
 builder.Services.AddTransient<IHTTPClientWrapper, HTTPClientWrapper>();
 ```
-
-### 2. **Dependency Injection Example**
-To use `SmartHttpClient`, inject `IHTTPClientWrapper` into your services, controllers, or classes:
-
-```csharp
-namespace HTTPClientService.Library;
-
-/// <summary>
-/// Represents a service for sending HTTP requests.
-/// </summary>
-public class MyService
-{
-    private readonly IHTTPClientWrapper _httpClientWrapper;
-
-    public MyService(IHTTPClientWrapper httpClientWrapper)
-    {
-        _httpClientWrapper = httpClientWrapper;
-    }
-
-    /// <summary>
-    /// Sends an HTTP request asynchronously and returns the response.
-    /// </summary>
-    /// <typeparam name="T">The type of the response.</typeparam>
-    /// <param name="requestParam">The parameters for the endpoint.</param>
-    /// <returns>The task representing the asynchronous operation, containing the response.</returns>
-    public async Task<T> SendRequestAsync<T>(object requestParam) where T : class
-    {
-        var request = new HTTPClientRequest
-        {
-            BaseUri = new Uri("https://localhost:7081/api/Application"),
-            Method = HttpMethod.Get,
-            RequestBody = new { Id = 1 },
-            EndpointParams = requestParam,
-            Timeout = TimeSpan.FromSeconds(5),
-            Authenticator = new Authenticator
-            {
-                AccessToken = "TOKEN-ABC1234",
-                Auth = AuthenticationMethod.Bearer
-            },
-            Headers = new Dictionary<string, string> { { "api-version", "2" } }
-        };
-
-        return await _httpClientWrapper.SendAsync<T>(request);
-    }
-}
-```
-
 ---
 
 ## **Usage Examples**
 
-### 1. **Strongly-Typed Request (`T`)**
-If you expect a specific response type, like a custom class `MyResponseModel`, you can use the generic `T` parameter to deserialize the response automatically:
+# Product Service CRUD Operations
 
-```csharp
-var requestParams = new { Name = "Test", Value = 42 };
-var result = await _httpClientWrapper.SendAsync<MyResponseModel>(new HTTPClientRequest
-{
-    BaseUri = new Uri("https://api.example.com"),
-    Method = HttpMethod.Post,
-    RequestBody = requestParams,
-    Headers = new Dictionary<string, string>
-    {
-        { "Authorization", "Bearer your-access-token" }
-    }
-});
+This service demonstrates how to perform CRUD (Create, Read, Update, Delete) operations using an `HTTPClientWrapper` with a strongly-typed `Product` class.
 
-// `result` is automatically deserialized into the MyResponseModel class.
-Console.WriteLine(result.PropertyName);
-```
+## Features
+
+### 2. **Strongly-Typed Request (`T`)**
+Leverage the generic `T` parameter to deserialize HTTP responses automatically into strongly-typed objects, such as the `Product` class.
 
 ---
-
-### 2. **Non-Typed Request (No `T`)**
-If you don't want to use a specific type for the response, you can retrieve the raw response as a string or a dynamic object:
-
+### 3. **Dependency Injection Example**
+To use SmartHttpClient, inject IHTTPClientWrapper into your services, controllers, or classes:
 ```csharp
-var result = await _httpClientWrapper.SendAsync<dynamic>(new HTTPClientRequest
+public class ProductService(IHTTPClientWrapper hTTPClientWrapper)
 {
-    BaseUri = new Uri("https://api.example.com"),
-    Method = HttpMethod.Get,
-    Headers = new Dictionary<string, string>
-    {
-        { "api-version", "1.0" }
-    }
-});
-
-// Access the dynamic response.
-Console.WriteLine(result.SomeProperty);
+    private readonly IHTTPClientWrapper hTTPClientWrapper = hTTPClientWrapper; 
+}
 ```
 
+## CRUD Operations
+
+### 4. **Get a Single Product by ID**
+Retrieve a specific product using its unique ID.  
+**Example Use Case:** Fetch detailed information about a specific product.
+```csharp
+// Get a single product by ID
+public async Task<Product> GetItemAsync(int id)
+{
+    var request = new HTTPClientRequest
+    {
+        BaseUri = new Uri("https://api.example.com/Product/{id}"),
+        Method = HttpMethod.Get,
+        Authenticator = new Authenticator
+        {
+            AccessToken = "TOKEN-ABC1234",
+            Auth = AuthenticationMethod.Bearer
+        }
+    };
+
+    return await _httpClientWrapper.SendAsync<Product>(request);
+}   
+
+```
+
+### 5. **Get a List of Products**
+Fetch all available products in the system.  
+**Example Use Case:** Display all products in a catalog or inventory list.
+```csharp
+    // Get a list of products
+    public async Task<IEnumerable<Product>> GetItemsAsync()
+    {
+        var request = new HTTPClientRequest
+        {
+            BaseUri = new Uri("https://api.example.com/Product/GetItems"),
+            Method = HttpMethod.Get,
+            Authenticator = new Authenticator
+            {
+                AccessToken = "TOKEN-ABC1234",
+                Auth = AuthenticationMethod.Bearer
+            }
+        };
+
+        return await _httpClientWrapper.SendAsync<IEnumerable<Product>>(request);
+    }
+
+```
+
+### 6. **Create a New Product**
+Add a new product to the system.  
+**Example Use Case:** Allow users to add new items to an inventory.
+
+```csharp
+   // Create a new product
+    public async Task<Product> CreateItemAsync(Product product)
+    {
+        var request = new HTTPClientRequest
+        {
+            BaseUri = new Uri("https://api.example.com/Product"),
+            Method = HttpMethod.Post,
+            RequestBody = product,
+            Authenticator = new Authenticator
+            {
+                AccessToken = "TOKEN-ABC1234",
+                Auth = AuthenticationMethod.Bearer
+            }
+        };
+
+        return await _httpClientWrapper.SendAsync<Product>(request);
+    }
+
+```
+
+### 7. **Update an Existing Product**
+Modify details of an existing product by its ID.  
+**Example Use Case:** Update the price, name, or description of a product.
+
+```csharp
+   // Update an existing product
+    public async Task<Product> UpdateItemAsync(Product product)
+    {
+        var request = new HTTPClientRequest
+        {
+            BaseUri = new Uri("https://api.example.com/Product"),
+            Method = HttpMethod.Put,
+            RequestBody = product,
+            Authenticator = new Authenticator
+            {
+                AccessToken = "TOKEN-ABC1234",
+                Auth = AuthenticationMethod.Bearer
+            }
+        };
+
+        return await _httpClientWrapper.SendAsync<Product>(request);
+    }
+
+```
+
+### 8. **Delete a Product by ID**
+Remove a product from the system using its unique ID.  
+**Example Use Case:** Remove discontinued or obsolete products.
+
+```csharp
+     // Delete a product by ID
+    public async Task<bool> DeleteItemAsync(int id)
+    {
+        var request = new HTTPClientRequest
+        {
+           BaseUri = new Uri("https://api.example.com/Product/{Id}"),
+            Method = HttpMethod.Delete,
+            Authenticator = new Authenticator
+            {
+                AccessToken = "TOKEN-ABC1234",
+                Auth = AuthenticationMethod.Bearer
+            }
+        };
+
+        var response = await _httpClientWrapper.SendAsync(request);
+        return response.IsSuccessStatusCode;
+    }
+
+```
 ---
 
-### 3. **Request Without Returning a Response**
-If you don’t need a response or just want to send a request, you can use `void`:
+### 9. **Downloading a File**
+To handle file downloads, use the HTTPClientWrapper to make a GET request and save the file content locally.
 
+
+### 10. **File Response Class**
+**Note:** The `FileResponse` class is a custom class that contains the file content and metadata.
 ```csharp
-await _httpClientWrapper.SendAsync(new HTTPClientRequest
+public class FileResponse
 {
-    BaseUri = new Uri("https://api.example.com"),
-    Method = HttpMethod.Delete,
-    Headers = new Dictionary<string, string>
-    {
-        { "Authorization", "Bearer your-access-token" }
-    }
-});
+    public string FileName { get; set; } // Name of the file
+    public byte[] Content { get; set; } // File content as a byte array
+}
 ```
 
+
+### 11. **Downloading File**
+**Example Use Case:** Download a file from a remote server and save it to the local filesystem.
+```csharp
+public async Task<FileResponse> DownloadFileAsync(int fileId)
+{
+    var request = new HTTPClientRequest
+    {
+        BaseUri = new Uri($"{https://api.example.com/FileDownload}{fileId}"),
+        Method = HttpMethod.Get,
+        Authenticator = new Authenticator
+        {
+            AccessToken = _sessionUser.AccessToken,
+            Auth = AuthenticationMethod.Bearer
+        }
+    };
+
+    var response = await _httpClientWrapper.SendAsync<FileResponse>(request);
+
+    // Save file locally
+    if (response != null && response.Content != null)
+    {
+        string filePath = Path.Combine("Downloads", response.FileName);
+        await File.WriteAllBytesAsync(filePath, response.Content);
+        Console.WriteLine($"File downloaded successfully to: {filePath}");
+    }
+
+    return response;
+}
+```
+---
+
+### 12. **Get Product with a Request**
+This section demonstrates how to fetch products by passing additional parameters to the controller, such as filtering options or other product data.
+
+
+### 13. **ProductRequest Class**
+The ProductRequest class encapsulates all the parameters required for requesting product data from the API.
+```csharp
+public class ProductRequest
+{  
+    public required string Manufacture { get; init; }  
+    public required string Model { get; init; }
+    public required string Colour { get; init; }   
+    public required decimal Price { get; init; }
+    public required bool Imported { get; init; }
+}
+
+```
+
+### 14. **Fetching Products with ProductRequest**
+Here’s how you can use the ProductRequest class to pass parameters to the controller:
+```csharp
+public async Task<IEnumerable<Product>> GetProductAsync(ProductRequest productRequest)
+{
+    var request = new HTTPClientRequest
+    {
+        BaseUri = new Uri("https://api.example.com/Product/GetItems"),
+        Method = HttpMethod.Get,
+        EndpointParams = productRequest, // Pass ProductRequest as query parameters
+        Authenticator = new Authenticator
+        {
+            AccessToken = _sessionUser.AccessToken,
+            Auth = AuthenticationMethod.Bearer
+        }
+    };
+
+    return await _httpClientWrapper.SendAsync<IEnumerable<Product>>(request);
+}
+
+```
 ---
 
 ## **Dependencies**
@@ -157,7 +281,7 @@ We welcome contributions! Please feel free to:
 ---
 
 ## **License**
-This project is licensed under the **MIT License**. See the [LICENSE](https://github.com/JoaoPereira83/HTTPClientService/blob/main/LICENSE) file for details.
+This project is licensed under the **MIT License**. See the [LICENSE](https://github.com/JoaoPereira83/SmartHttpClient/blob/master/License) file for details.
 
 ---
 
